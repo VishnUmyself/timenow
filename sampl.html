@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Search with API Suggestions</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="search-container">
+    <input type="text" id="city" placeholder="Search for a city" onkeyup="showSuggestions(this.value)">
+    <ul id="suggestionsList" class="suggestions-list"></ul>
+  </div>
+
+  <script>
+    // Function to show suggestions based on input
+    async function showSuggestions(query) {
+      const suggestionsList = document.getElementById('suggestionsList');
+      suggestionsList.innerHTML = '';  // Clear previous suggestions
+
+      if (query.length === 0) {
+        return;  // No input, so no suggestions
+      }
+
+      try {
+        // Fetch data from the Nominatim API with the user input
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?city=${query}&format=json&addressdetails=1`);
+        const data = await response.json();
+
+        // If no results, return
+        if (!data || data.length === 0) {
+          return;
+        }
+
+        // Loop through the results and display them as suggestions
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.display_name;  // Display the full city name (including region, country)
+          li.onclick = () => selectCity(item.display_name);
+          suggestionsList.appendChild(li);
+        });
+      } catch (error) {
+        console.error('Error fetching city data:', error);
+      }
+    }
+
+    // Function to handle city selection
+    function selectCity(city) {
+      const cityInput = document.getElementById('city');
+      cityInput.value = city;  // Set the input value to the selected city
+      document.getElementById('suggestionsList').innerHTML = '';  // Clear suggestions after selection
+    }
+  </script>
+
+</body>
+</html>

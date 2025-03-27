@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Time</title>
+</head>
+<body>
+    <h1>Current Time</h1>
+    <p id="time"></p>
+    <p id="1"></p>
+    <p id="2"></p>
+    <p id="3"></p>
+    <input type="text" id="city"><button onclick="findCity()">Click for data</button>    
+    <script>
+
+// let timeZone = ""
+// async function ipLocation() {
+//     let response = await fetch('https://ipinfo.io/json/');
+//     let obj = await response.json();
+//     console.log(obj)
+//     timeZone = obj.timezone;
+//     console.log(obj.city, obj.region, obj.country, obj.timezone)
+// }
+
+
+
+// async function getProxyTime() {
+// const timeZone = "America/New_York";
+// const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+// const targetUrl = "https://www.google.com"; // Provides Date header in UTC
+
+// try {
+//     const response = await fetch(proxyUrl + targetUrl, { method: 'HEAD' });
+//     const serverDate = response.headers.get('Date'); // UTC time from server
+//     let currentTime = new Date(serverDate); // Parse UTC time directly
+
+//     if (isNaN(currentTime)) {
+//         throw new Error("Invalid server date received");
+//     }
+
+//     const options = {
+//         timeZone: timeZone,
+//         hour: '2-digit',
+//         minute: '2-digit',
+//         second: '2-digit',
+//         hour12: true
+//     };
+
+//     // Update time every second
+//     setInterval(() => {
+//         currentTime.setUTCSeconds(currentTime.getUTCSeconds() + 1); // Increment in UTC
+//         const formattedTime = currentTime.toLocaleTimeString('en-US', options); // Format for display
+//         document.getElementById('time').innerHTML = `Time in ${timeZone}: ${formattedTime}`;
+//     }, 1000);
+
+//     // Initial display
+//     const formattedTime = currentTime.toLocaleTimeString('en-US', options);
+//     document.getElementById('time').innerHTML = `Time in ${timeZone}: ${formattedTime}`;
+// } catch (error) {
+//     console.error("Error:", error);
+//     document.getElementById('time').innerHTML = "Failed to load time";
+// }
+// }
+
+// getProxyTime();
+
+
+
+
+// fetch('https://api-bdc.net/data/reverse-geocode-client?latitude=40.7&longitude=78.976&localityLanguage=en')
+// .then(response => response.json())
+// .then(data => {console.log(data) 
+// let n = data.localityInfo.informative.length;
+// console.log(n);
+
+// for(let i = 0; i<=n; i++){
+//     if(data.localityInfo.informative[i].description == 'time zone'){
+//         console.log(data.localityInfo.informative[i].name)
+//     }
+// }
+
+// });
+
+
+
+   
+// async function findCity(){
+// let city = document.getElementById('city').value;
+// const url = `https://nominatim.openstreetmap.org/search?city=${city}&format=json&addressdetails=1`;
+
+// const response = await fetch(url);
+// const data = await response.json();
+
+// console.log(data);
+// }
+ 
+// const timezone = "Asia/Kolkata"
+// fetch(`https://worldtimeapi.org/api/timezone/${timezone}.json/`)
+//   .then((response) => response.json())
+//   .then((data) => {
+//       console.log(data)
+//   });
+
+
+
+
+// const apiKey = 'H7ZE405LMMJ3';
+// const url = `http://api.timezonedb.com/v2.1/list-time-zone?key=${apiKey}&format=json`;
+
+// // Fetching data from the API
+// fetch(url)
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log(data)
+    
+//     setInterval(() => {
+//       data.zones.forEach(zone => {
+//         let zoneTime = new Date(zone.timestamp * 1000);
+//         zoneTime.setSeconds(zoneTime.getSeconds() + 1);
+//         zone.timestamp = Math.floor(zoneTime.getTime() / 1000);
+//         const len = data.zones.length;
+    
+//         let options = {
+//             timeZone: zone.zoneName,
+//             hour: '2-digit',
+//             minute: '2-digit',
+//             second: '2-digit',
+//             hour12: false,
+//             };
+    
+//         for(let i = 0; i < len; i++){
+            
+//             if(data.zones[i].zoneName == 'Asia/Kolkata'){
+//                 document.getElementById('1').innerHTML = (new Date(data.zones[i].timestamp*1000).toLocaleString('en-US', options))
+//             }
+//             else if(data.zones[i].zoneName == 'America/New_York'){
+//                 document.getElementById('2').innerHTML = (new Date(data.zones[i].timestamp*1000).toLocaleString('en-US', options))
+//             }
+//             else if(data.zones[i].zoneName == 'Asia/Bangkok'){
+//                 document.getElementById('3').innerHTML = (new Date(data.zones[i].timestamp*1000).toLocaleString('en-US', options))
+//             }
+//         }
+//       });
+//     }, 1000);
+
+//   })
+
+
+
+
+// function time() {
+//   const startTime = Date.now(); // Record start time
+
+//   fetch('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata')
+//     .then(response => response.json())
+//     .then(data => {
+//       const endTime = Date.now(); // Record end time
+//       const duration = endTime - startTime; // Calculate time taken
+
+//       console.log(data);
+//       console.log(`API request took ${duration / 1000}ms`);
+//       // timeWithMilliSeconds = (data.dateTime.split('T')[1]);
+//       // timeOnly = (timeWithMilliSeconds.split(".")[0]);
+//       // console.log(timeOnly)
+//       // console.log(timeWithMilliSeconds);
+
+//       let isTime = data.dateTime;
+
+//       let Time = new Date(isTime);
+
+//       let hrs = String(Time.getHours()).padStart(2, '0');
+//       let min = String(Time.getMinutes()).padStart(2, '0');
+//       let sec = String(Time.getSeconds()).padStart(2, '0');
+
+//       let time = `${hrs}:${min}:${sec}`;
+
+//       console.log(time);
+
+//     setInterval(()=>{
+//       Time.setSeconds(Time.getSeconds() + 1);
+//     let newHrs = String(Time.getHours()).padStart(2, '0');
+//     let newMin = String(Time.getMinutes()).padStart(2, '0');
+//     let newSec = String(Time.getSeconds()).padStart(2, '0');
+
+//     // Format the updated time as hh:mm:ss
+//     let newTime = `${newHrs}:${newMin}:${newSec}`;
+
+//     // Log the updated time
+//     console.log(newTime);
+//     }, 1000)
+
+//     });
+// }
+
+// time();
+
+
+//get timezones from timeapi.io
+async function getTimezoneNamesFromTimeAPI() {
+    const url = 'https://timeapi.io/api/timezone/availabletimezones';
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    for (let i = 0; i < data.length; i++) {
+        const timeZone = data[i];
+        
+        try {
+            const timeResponse = await fetch(`https://timeapi.io/api/Time/current/zone?timeZone=${encodeURIComponent(timeZone)}`);
+            const timeData = await timeResponse.json();
+
+            let times = timeData.dateTime.split('T')[1];
+            console.log(`${timeZone}: ${times.split('.')[0]}`)     
+
+            if (timeData.dateTime) {
+                const time = timeData.dateTime;
+                let updated_time = time.split('T')[1].split('.')[0];
+
+                let sectime = new Date(time);
+                
+                    if (timeZone === 'Asia/Kolkata') {
+                        setInterval(() => {
+                            sectime.setSeconds(sectime.getSeconds() + 1);
+                                var time = sectime.toLocaleTimeString([],{
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit',
+                                    hour12: false
+                                });
+                                document.getElementById('1').innerHTML = `<h1>${time}</h1>`;
+                            }, 1000);
+                    } else if (timeZone === 'America/New_York') {
+                        document.getElementById('2').innerHTML = updated_time;
+                    } else if (timeZone === 'Turkey') {
+                        document.getElementById('3').innerHTML = updated_time;
+                    }
+            
+            } 
+        } catch (error) {
+            console.error(`Error fetching data for timezone ${timeZone}:`, error);
+        }
+    }
+}
+
+getTimezoneNamesFromTimeAPI();
+
+
+</script> 
+</body>
+</html>
