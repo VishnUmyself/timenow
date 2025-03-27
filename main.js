@@ -3,14 +3,14 @@ let cityName = "";
 let cityDetails = "";
 
 async function ipLocation() {
-    let response = await fetch('https://corsproxy.io/?http://ip-api.com/json/');
+    let response = await fetch('https://ipinfo.io/json/');  //http://ip-api.com/json/
     let obj = await response.json();
 
     let state = "";
     let countryFullName = "";
 
     cityName = obj.city;
-    state = obj.regionName;  // Region can be the state or province
+    state = obj.region;  // Region can be the state or province
     countryFullName = obj.country;  // Full country name (e.g., United States)
     timezone = obj.timezone;  // Timezone (e.g., "America/New_York")
     
