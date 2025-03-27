@@ -3,7 +3,7 @@ let cityName = "";
 let cityDetails = "";
 
 async function ipLocation() {
-    let response = await fetch('https://thingproxy.freeboard.io/fetch/http://ip-api.com/json/');
+    let response = await fetch('https://corsproxy.io/?http://ip-api.com/json/');
     let obj = await response.json();
 
     let state = "";
