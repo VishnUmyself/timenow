@@ -12,6 +12,7 @@ async function ipLocation() {
     cityName = obj.city;
     state = obj.region;  // Region can be the state or province
     countryFullName = obj.country;  // Full country name (e.g., United States)
+    console.log(countryFullName)
     timezone = obj.timezone;  // Timezone (e.g., "America/New_York")
     
     cityDetails = `<p>Time in <a href = '${cityName}'>${cityName}, ${state}, ${countryFullName}</a> now:</p>`
